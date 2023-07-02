@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "abider.fullname" . }}
+  labels:
+    {{- include "abider.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "abider.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    # maxSurge: 0
+    # maxUnavailable: 1
+    type: Replace
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "abider.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: ABIDER_DISCORD_CHANNEL_ID
+              value: "{{ .Values.discord.channelId }}"
+            - name: ABIDER_SUBPROCESS_TIMEOUT
+              value: "{{ .Values.discord.timeout }}"
+            - name: ABIDER_DISCORD_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: discord-token
+                  {{- if .Values.discord.tokenSecretName }}
+                  name: {{ .Values.discord.tokenSecretName }}
+                  {{- else }}
+                  name: {{ include "abider.fullname" . }}
+                  {{- end }}
+            {{- if .Values.env }}
+              {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
+          name: {{ .Chart.Name }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.debugPy.enabled }}
+          ports:
+            - name: debugypy
+              containerPort: 5678
+              protocol: TCP
+          {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      resources:
+        {{- toYaml .Values.resources | nindent 10 }}
+      serviceAccountName: {{ include "abider.rbac.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ .Values.discord.timeout }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

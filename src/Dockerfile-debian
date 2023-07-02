@@ -1,0 +1,16 @@
+FROM docker.io/python:3.11.4-bookworm
+ARG ABIDER_WORK_DIR='/usr/src/app/'
+USER root
+RUN groupadd -r abider -g 405 && useradd -u 405 --no-log-init -r -g abider abider
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install --no-install-recommends --assume-yes \
+      curl net-tools && \
+    apt-get clean
+WORKDIR ${ABIDER_WORK_DIR}
+COPY ./requirements.txt .
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
+COPY --chown=405:405 ./ ./
+USER 405
+CMD ["python", "main.py"]

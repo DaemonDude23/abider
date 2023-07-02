@@ -1,0 +1,78 @@
+affinity: {}
+env: []
+  # - name: ABIDER_DEBUGPY
+  #   value: enabled
+  # - name: ABIDER_DEBUGPY_WAIT
+  #   value: enabled
+  # - name: ABIDER_WEEKDAY
+  #   value: enabled
+discord:
+  channelId: ''
+  timeout: '60'
+  token: ""
+  tokenSecretName: ""
+debugPy:
+  enabled: true
+fullnameOverride: ''
+image:
+  pullPolicy: Always
+  registry: abider.k3d.internal:5000
+  repository: abider/debian
+  tag: latest
+imagePullSecrets: []
+livenessProbe:
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 2
+  initialDelaySeconds: 1
+  periodSeconds: 60
+  successThreshold: 1
+  timeoutSeconds: 5
+nameOverride: ''
+nodeSelector:
+  kubernetes.io/os: linux
+podAnnotations: {}
+podSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+rbac:
+  serviceAccount:
+    annotations: {}
+    create: false
+    name: ''
+readinessProbe:
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 3
+  initialDelaySeconds: 0
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 5
+replicaCount: 1
+resources:
+  limits:
+    memory: 300Mi
+  requests:
+    cpu: 10m
+    memory: 300Mi
+securityContext:
+  fsGroup: 405
+  runAsGroup: 405
+  runAsNonRoot: true
+  runAsUser: 405
+startupProbe:
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 3
+  initialDelaySeconds: 3
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 5
+tolerations: []

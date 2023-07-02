@@ -1,0 +1,22 @@
+disable_existing_loggers: true
+formatters:
+  json:
+    (): logging_json.JSONFormatter
+    datefmt: '%Y-%m-%dT%H:%M:%S%z'
+    fields:
+      level: levelname
+      timestamp: asctime
+  plain:
+    datefmt: '%Y-%m-%dT%H:%M:%S%z'
+    format: '%(asctime)s %(levelname)s %(message)s'
+handlers:
+  json:
+    class: logging.StreamHandler
+    formatter: json
+    stream: ext://sys.stdout
+root:
+  handlers:
+    - json
+  level: INFO
+  propagate: 'no'
+version: 1

@@ -1,0 +1,15 @@
+aiohttp==3.8.4
+aiosignal==1.3.1
+async-timeout==4.0.2
+attrs==23.1.0
+charset-normalizer==3.1.0
+coloredlogs==15.0.1
+discord.py==2.3.1
+discordhealthcheck==0.1.1
+frozenlist==1.3.3
+humanfriendly==10.0
+idna==3.4
+logging_json==0.4.0
+multidict==6.0.4
+PyYaml==6.0
+yarl==1.9.2

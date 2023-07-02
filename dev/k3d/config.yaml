@@ -1,0 +1,54 @@
+---
+agents: 0
+apiVersion: k3d.io/v1alpha4
+image: docker.io/rancher/k3s:v1.26.1-k3s1
+kind: Simple
+kubeAPI:
+  host: 127.0.0.1
+  hostIP: 127.0.0.1
+  hostPort: '6445'
+metadata:
+  name: abider
+options:
+  k3d:
+    disableImageVolume: false
+    disableLoadbalancer: true
+    disableRollback: false
+    loadbalancer:
+      configOverrides:
+        - settings.workerConnections=2048
+    timeout: 60s
+    wait: true
+  k3s:
+    extraArgs:
+      - arg: '--tls-san=127.0.0.1'
+        nodeFilters:
+          - server:*
+      - arg: '--disable=servicelb'
+        nodeFilters:
+          - server:*
+      - arg: '--disable=traefik'
+        nodeFilters:
+          - server:*
+  kubeconfig:
+    switchCurrentContext: true
+    updateDefaultKubeconfig: true
+  runtime: {}
+registries:
+  create:
+    name: abider
+    volumes:
+      - /home/drew/k3d-registry/:/var/lib/registry:rw
+  config: |
+    mirrors:
+      "k3d-abider.k3d.internal:5000":
+        endpoint:
+          - http://k3d-abider.k3d.internal:5000
+servers: 1
+subnet: 172.29.0.0/16
+token: LyrvFpqLfOOqKgVptEzkhfj6orQhx8ryjg5d3zScpeX8wA6fEYZvHjKEw34gttQ
+volumes:
+  - nodeFilters:
+      - server:0
+      - agent:*
+    volume: /dev/mapper:/dev/mapper

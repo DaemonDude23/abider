@@ -1,0 +1,91 @@
+# -- standard affinities
+affinity: {}
+# -- additional environment variables to inject
+env: []
+#   - name: ABIDER_DEBUGPY
+#     value: enabled
+#   - name: ABIDER_DEBUGPY_WAIT
+#     value: disabled
+#   - name: ABIDER_WEEKDAY
+#     value: enabled
+discord:
+# -- discord channel id
+  channelId: ''
+# -- command execution timeout
+  timeout: '60'
+# -- Discord bot token. creates a Secret object containing the token
+  token: ""  # put your bot token here. Leave blank and manage your own secret with tokenSecretName
+# -- reference a separately managed secret
+  # kubectl create secret generic abider --from-literal discord-token='PUT_TOKEN_HERE'
+  tokenSecretName: ""
+debugPy:
+# -- used for dev testing
+  enabled: false
+fullnameOverride: ''
+# -- container image settings
+image:
+  pullPolicy: IfNotPresent
+  # -- override container registry
+  registry: ghcr.io
+  # -- repository within the registry
+  repository: daemondude23/abider/debian
+  # -- image tag. Semantic versioning is used
+  tag: v0.1.0
+imagePullSecrets: []
+livenessProbe:
+# -- library used to enable this: https://pypi.org/project/discordhealthcheck/
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 2
+  initialDelaySeconds: 1
+  periodSeconds: 60
+  successThreshold: 1
+  timeoutSeconds: 5
+nameOverride: ''
+nodeSelector:
+  kubernetes.io/os: linux
+podAnnotations: {}
+podSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+rbac:
+  serviceAccount:
+    annotations: {}
+    create: false
+    name: ''
+readinessProbe:
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 3
+  initialDelaySeconds: 0
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 5
+replicaCount: 1
+resources:
+  limits:
+    memory: 300Mi
+  requests:
+    cpu: 10m
+    memory: 300Mi
+securityContext:
+  fsGroup: 405
+  runAsGroup: 405
+  runAsNonRoot: true
+  runAsUser: 405
+startupProbe:
+  exec:
+    command:
+      - discordhealthcheck
+  failureThreshold: 3
+  initialDelaySeconds: 3
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 5
+tolerations: []

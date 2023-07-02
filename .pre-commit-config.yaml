@@ -1,0 +1,77 @@
+---
+repos:
+  - hooks:
+      # - files: ^.*\.yaml$
+      #   id: sort-simple-yaml
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: destroyed-symlinks
+      - id: detect-aws-credentials
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - args:
+          - '--remove'
+        id: fix-encoding-pragma
+      - id: mixed-line-ending
+      - args:
+          - '--maxkb=1024'
+        id: check-added-large-files
+      - args:
+          - '--markdown-linebreak-ext=md'
+        id: trailing-whitespace
+      - id: check-symlinks
+      # - args:
+      #     - '--allow-multiple-documents'
+      #   files: ^dev\/.*\.yaml$
+      #   id: check-yaml
+      # - files: ^dev\/.*\.yaml$
+      #   id: sort-simple-yaml
+      - args:
+          - '--maxkb=1024'
+        id: check-added-large-files
+      - id: requirements-txt-fixer
+      - id: check-ast
+    repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: v1.11.0
+    hooks:
+      - id: helm-docs
+        args:
+          - --chart-search-root=deploy/helm/charts/abider
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.0.1
+  #   hooks:
+  #   - id: mypy
+  #     args:
+  #     - --check-untyped-defs
+  #     - --ignore-missing-imports
+  #     - --install-types
+  #     - --non-interactive
+  #     files: src/main.py
+  - hooks:
+      - args:
+          - '--application-directories'
+          - .:src
+          - '--py39'
+        id: reorder-python-imports
+    repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.10.0
+  - hooks:
+      - args:
+          - '--line-length=130'
+          - '--include=''\.pyi?$'''
+          - '--exclude=\.git|\.__pycache__|\.hg|\.mypy_cache|\.tox|\.venv|_build|buck-out|build|dist'
+        id: black
+        language_version: python3.10
+    repo: https://github.com/ambv/black
+    rev: 23.3.0
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: 1.14.0
+    hooks:
+    - id: blacken-docs
+      additional_dependencies:
+      - black==23.3.0

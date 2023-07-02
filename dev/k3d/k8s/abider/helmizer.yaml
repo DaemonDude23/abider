@@ -1,0 +1,20 @@
+helmizer:
+  commandSequence:
+    - args:
+        - '-n'
+        - default
+        - template
+        - abider
+        - '--output-dir'
+        - ../
+        - '--include-crds'
+        - '--skip-tests'
+        - '--values'
+        - './values.yaml'
+        - --debug
+        - ../../../../deploy/helm/charts/abider
+      command: helm
+kustomize:
+  namespace: default
+  resources:
+    - templates/

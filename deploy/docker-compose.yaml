@@ -1,0 +1,10 @@
+services:
+  abider:
+    container_name: abider
+    environment:
+      - ABIDER_DISCORD_CHANNEL_ID=""
+      - ABIDER_DISCORD_TOKEN=""
+      - ABIDER_SUBPROCESS_TIMEOUT="60"
+    image: ghcr.io/daemondude23/abider/debian:v0.1.0
+    restart: unless-stopped
+version: '3.8'
