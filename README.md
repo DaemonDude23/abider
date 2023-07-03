@@ -49,8 +49,8 @@ After the uh... what-have-you and before you go to the In-N-Out Burger, check it
 ## Deploy
 
 - Images are offered in:
-  - **Debian (Bookworm)** ([`ghcr.io/daemondude23/abider/debian:v0.1.0`](ghcr.io/daemondude23/abider/debian:v0.1.0))
-  - **Alpine (3.18)** ([`ghcr.io/daemondude23/abider/alpine:v0.1.0`](ghcr.io/daemondude23/abider/alpine:v0.1.0)).
+  - **Debian (Bookworm)** ([https://github.com/DaemonDude23/abider/pkgs/container/abider%2Fdebian](https://github.com/DaemonDude23/abider/pkgs/container/abider%2Fdebian))
+  - **Alpine (3.18)** ([https://github.com/DaemonDude23/abider/pkgs/container/abider%2Falpine](https://github.com/DaemonDude23/abider/pkgs/container/abider%2Falpine)).
   - As always, never use the `latest` tag in production. There are more tags available.
 - A **Kubernetes Helm Chart** is provided [in this repository](https://github.com/DaemonDude23/abider/tree/main/deploy/helm/charts/abider).
 - A [`docker-compose.yml`](./deploy/docker-compose.yaml) file is available as well:
