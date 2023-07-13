@@ -6,7 +6,7 @@ charset-normalizer==3.1.0
 coloredlogs==15.0.1
 discord.py==2.3.1
 discordhealthcheck==0.1.1
-frozenlist==1.3.3
+frozenlist==1.4.0
 humanfriendly==10.0
 idna==3.4
 logging_json==0.4.0
