@@ -1,4 +1,4 @@
-FROM docker.io/python:3.11.4-alpine
+FROM docker.io/python:3.11.5-alpine
 ARG ABIDER_WORK_DIR='/usr/src/app/'
 WORKDIR ${ABIDER_WORK_DIR}
 # install useful commands
