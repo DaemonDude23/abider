@@ -60,7 +60,7 @@ jobs:
             type=semver,pattern=v{{major}}.{{minor}}.{{patch}}
             type=semver,pattern=v{{version}}
       - name: Docker - Build and Push - Alpine
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           push: true
           tags: ${{ steps.alpine.outputs.tags }}
@@ -70,7 +70,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Docker - Build and Push - Debian
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           push: true
           tags: ${{ steps.debian.outputs.tags }}
