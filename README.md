@@ -53,6 +53,9 @@ After the uh... what-have-you and before you go to the In-N-Out Burger, check it
   - **Alpine (3.18)** ([https://github.com/DaemonDude23/abider/pkgs/container/abider%2Falpine](https://github.com/DaemonDude23/abider/pkgs/container/abider%2Falpine)).
   - As always, never use the `latest` tag in production. There are more tags available.
 - A **Kubernetes Helm Chart** is provided [in this repository](https://github.com/DaemonDude23/abider/tree/main/deploy/helm/charts/abider).
+   ```bash
+   helm repo add abider https://daemondude23.github.io/abider
+   ```
 - A [`docker-compose.yml`](./deploy/docker-compose.yaml) file is available as well:
   ![abider-3](./docs/images/abider-3.png)
 
