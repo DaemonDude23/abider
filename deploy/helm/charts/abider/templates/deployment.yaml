@@ -9,9 +9,7 @@ spec:
   selector:
     matchLabels:
       {{- include "abider.selectorLabels" . | nindent 6 }}
-  updateStrategy:
-    # maxSurge: 0
-    # maxUnavailable: 1
+  updateStrategy: {}
     type: Replace
   template:
     metadata:

@@ -50,7 +50,7 @@ jobs:
             type=semver,pattern=v{{version}}
       - name: Docker = Metadata - Debian
         id: debian
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: |
             ghcr.io/daemondude23/abider/debian
@@ -90,7 +90,7 @@ jobs:
       - name: Helm - Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: deploy/helm/charts/abider
+          charts_dir: deploy/helm/charts
           config: deploy/helm/charts/abider/cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
