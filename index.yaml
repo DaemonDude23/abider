@@ -1,0 +1,28 @@
+apiVersion: v1
+entries:
+  abider:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-09-24T01:20:58.022741999Z"
+    description: 'Helm Chart for Abider. Abider is a far out Discord bot. It can be
+      used by administrators to have a little instance somewhere (a container, specifically),
+      and to run shell commands from it.  See the Changelog at https://github.com/DaemonDude23/abider/blob/main/CHANGELOG.md '
+    digest: f73678071ba1edbdecb91d7f38c6fd0e9251e25f2e7cdfd548ba095e91613215
+    home: https://github.com/daemondude23/abider
+    keywords:
+    - abider
+    - abides
+    - bot
+    - discord
+    - dude
+    - lebowski
+    kubeVersion: '>=1.20.0-0'
+    maintainers:
+    - name: daemondude23
+    name: abider
+    sources:
+    - https://github.com/daemondude23/abider
+    urls:
+    - https://github.com/DaemonDude23/abider/releases/download/abider-0.2.0/abider-0.2.0.tgz
+    version: 0.2.0
+generated: "2023-09-24T01:20:58.022755799Z"
