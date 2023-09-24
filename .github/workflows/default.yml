@@ -18,6 +18,11 @@ jobs:
       packages: write
     runs-on: ubuntu-latest
     steps:
+      - name: Git User Setup
+        shell: bash
+        run: |
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Helm - Setup
         uses: azure/setup-helm@v3
       - name: GitHub - Checkout repository
