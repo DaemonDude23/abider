@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker - Metadata - Alpine
         id: alpine
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: |
             ghcr.io/daemondude23/abider/alpine
@@ -50,7 +50,7 @@ jobs:
             type=semver,pattern=v{{version}}
       - name: Docker = Metadata - Debian
         id: debian
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: |
             ghcr.io/daemondude23/abider/debian
