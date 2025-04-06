@@ -12,4 +12,4 @@ idna==3.4
 logging_json==0.4.0
 multidict==6.0.4
 PyYaml==6.0.1
-yarl==1.9.2
+yarl==1.19.0
