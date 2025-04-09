@@ -1,4 +1,4 @@
-FROM docker.io/python:3.11.5-bookworm
+FROM docker.io/python:3.13.3-bookworm
 ARG ABIDER_WORK_DIR='/usr/src/app/'
 USER root
 RUN groupadd -r abider -g 405 && useradd -u 405 --no-log-init -r -g abider abider
