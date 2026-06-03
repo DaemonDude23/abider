@@ -4,7 +4,7 @@ async-timeout==4.0.3
 attrs==23.1.0
 charset-normalizer==3.2.0
 coloredlogs==15.0.1
-debugpy==1.8.0
+debugpy==1.8.21
 discord.py==2.3.2
 discordhealthcheck==0.1.1
 frozenlist==1.4.0
